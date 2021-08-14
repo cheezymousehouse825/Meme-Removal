@@ -9,7 +9,7 @@ I made this because a lot of people are having issues with memes being spammed i
 
 ### Windows
 
-For this, all you need to do is go to the [releases](https://github.com/ohgodmanyo/Meme-Removal/releases/latest/) section of this project, and download the latest release.
+For this, all you need to do is go to the [releases](https://github.com/cheezymousehouse825/Meme-Removal/releases/latest/) section of this project, and download the latest release.
 
 Now that you are done, we can get to setting up the file for use. First we are going to need to install [tesseract](https://github.com/UB-Mannheim/tesseract/wiki). Once you have installed that, you will need to create a reddit account. Once that is finished, go to [apps](https://www.reddit.com/prefs/apps/) and hit create a new app. Call it whatever you want, select the script button (it is default to web app) and add descriptions and urls. After this, you run the settings file you downloaded from me and put in the location of the tesseract.exe file, the client id, client secret, reddit username, reddit passowrd, user agent, and subreddit you would like to moderate (don't forget to set your bot as administrator for this!)
 
@@ -29,7 +29,7 @@ For this way, you will need python installed. Run the following lines of code in
 
 ```pip install requests```
 
-```git clone https://github.com/ohgodmanyo/Meme-Removal/```
+```git clone https://github.com/cheezymousehouse825/Meme-Removal/```
 
 Now, the repository and the modules have been installed.
 
@@ -42,8 +42,8 @@ After this, you can just follow the other steps as shown in the Installation sec
 
 ## Meta
 
-Ohgodmanyo – [@Ohgodmanyo](https://twitter.com/Ohgodmanyo) – Ohgodmanyo@protonmail.com
+cheezymousehouse825 – [@cheezymousehouse825](https://twitter.com/cheezymh825)
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
-[https://github.com/ohgodmanyo](https://github.com/ohgodmanyo/)
+[https://github.com/cheezymousehouse825](https://github.com/cheezymousehouse825/)
