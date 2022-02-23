@@ -108,7 +108,7 @@ while True:
         with open("image.jpg", "wb") as f:
             f.write(pic.content)
 
-    imageToScan = 'image1.jpg'
+    imageToScan = 'image.jpg'
     headingsValue = scan_headings(imageToScan)
     textValue = scan_text(imageToScan)
     print("Headings Value:", headingsValue)
