@@ -1,6 +1,5 @@
 import pytesseract as tess
 from PIL import Image
-from collections import Counter
 import praw
 import json
 import requests
