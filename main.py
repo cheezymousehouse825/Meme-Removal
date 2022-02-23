@@ -12,23 +12,26 @@ def scan_headings(image):
     px = im.load()
     width, height = im.size
     pixels = []
+    sums = []
 
     # gets the first few pixel values
     for i in range(5):
         for j in range(width):
             pixels.append(px[j, i])
 
-    pixel_values = dict(Counter(pixels))
-    total = sum(pixel_values.values())
-    max_key = max(pixel_values, key=pixel_values.get)
-    percentage = pixel_values[max_key] / total * 100
-    return percentage
+    for i in pixels:
+        sums.append(sum(i))
+
+    lowestValue = min(sums)
+    highestValue = max(sums)
+    skew = highestValue - lowestValue
+    return skew
 
 
 def scan_text(image):
     tess.pytesseract.tesseract_cmd = dictionary['location']
     im = Image.open(image)
-    text = tess.image_to_string(im)
+    text = tess.image_to_string(im, lang='eng')
     word_count = 0
 
     # Loops through words
@@ -71,13 +74,12 @@ while True:
 
     # Checking if subreddit is empty
     if postId is None or postId in postList:
-        print('There is nothing new in this subreddit, waiting for new posts')
         time.sleep(10)
         continue
     # Gets the link to the image
     postLink = r.json()[0]['data']['children'][0]['data']['url']
     # Checking if it is a link to another post
-    while '.jpg' not in postLink and not isText:
+    while '.jpg' not in postLink and '.png' not in postLink and not isText:
         r = requests.get('{}.json'.format(postLink),
                          headers={'User-agent': dictionary['userAgent']})
         postLink = r.json()[0]['data']['children'][0]['data']['url']
@@ -94,16 +96,32 @@ while True:
     print(postLink)
 
     pic = requests.get(postLink)
-    with open("image.jpg", "wb") as f:
-        f.write(pic.content)
 
-    imageToScan = 'image.jpg'
-    if scan_headings(imageToScan) >= 50 and scan_text(imageToScan) > 3:
+    if '.png' in postLink:
+        with open("image.png", "wb") as f:
+            f.write(pic.content)
+        impng = Image.open("image.png")
+        rgb_impng = impng.convert("RGB")
+        rgb_impng.save("image.jpg")
+
+    else:
+        with open("image.jpg", "wb") as f:
+            f.write(pic.content)
+
+    imageToScan = 'image1.jpg'
+    headingsValue = scan_headings(imageToScan)
+    textValue = scan_text(imageToScan)
+    print("Headings Value:", headingsValue)
+    print("Text Value:", textValue)
+
+    if headingsValue < 130 and textValue > 3:
+        print('This post has been detected as a meme')
         submissionToDelete = reddit.submission(id=postId)
         submissionToDelete.mod.remove(spam=True)
         submissionToDelete.mod.send_removal_message('Sorry, but this post has been detected as '
                                                     'a meme. Please remove any borders or text you have added.')
         time.sleep(10)
     else:
+        print("This post is not a meme")
         postList.append(postId)
         time.sleep(10)
