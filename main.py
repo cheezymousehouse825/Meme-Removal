@@ -118,7 +118,9 @@ while True:
         submissionToDelete = reddit.submission(id=postId)
         submissionToDelete.mod.remove(spam=True)
         submissionToDelete.mod.send_removal_message('Sorry, but this post has been detected as '
-                                                    'a meme. Please remove any borders or text you have added.')
+                                                    'a meme. Please remove any borders or text you have added.'
+                                                    ' If this is NOT a meme, please reply to this comment, and '
+                                                    'do not delete the post.')
         time.sleep(10)
     else:
         print("This post is not a meme")
