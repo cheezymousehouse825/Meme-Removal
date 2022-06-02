@@ -88,7 +88,6 @@ while True:
     # Checking if the post is text
     if isText:
         isText = False
-        print('This is a text post, waiting for image')
         time.sleep(10)
         continue
 
