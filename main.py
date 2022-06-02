@@ -121,6 +121,7 @@ while True:
                                                     'a meme. Please remove any borders or text you have added.'
                                                     ' If this is NOT a meme, please reply to this comment, and '
                                                     'do not delete the post.')
+        postList.append(postId)
         time.sleep(10)
     else:
         print("This post is not a meme")
